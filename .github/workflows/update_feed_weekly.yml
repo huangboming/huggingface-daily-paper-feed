@@ -42,5 +42,5 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add feed_weekly.xml
           # Commit only if there are changes staged
-          git diff --staged --quiet || git commit -m "Update Weekly RSS feed"
+          git diff --staged --quiet || git commit -m "bot: update weekly RSS feed"
           git push
