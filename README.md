@@ -50,8 +50,8 @@ You can also run the script locally to generate the feeds manually.
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
-    cd YOUR_REPOSITORY
+    git clone https://github.com/huggingface/papers-rss-feed.git
+    cd papers-rss-feed
     ```
     (Replace `YOUR_USERNAME/YOUR_REPOSITORY` with the actual path to this repo).
 
