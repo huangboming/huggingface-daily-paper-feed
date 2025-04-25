@@ -1,0 +1,46 @@
+name: Update Hugging Face Papers Weekly RSS Feed
+
+on:
+  schedule:
+    # Runs every Monday at midnight UTC
+    - cron: '0 0 * * 1'
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  update-feed-weekly:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Allow the job to push changes
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11' # Specify Python version
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate weekly URL
+        id: generate_url # Give this step an ID to reference its output
+        run: |
+          WEEKLY_TAG=$(date +%Y-W%V) # Format: YYYY-Www (ISO 8601 week)
+          echo "Generated weekly tag: $WEEKLY_TAG"
+          URL="https://huggingface.co/papers/week/${WEEKLY_TAG}"
+          echo "URL=$URL" >> $GITHUB_OUTPUT # Set output for use in next step
+
+      - name: Run parser and generate weekly feed
+        run: python parser.py --source ${{ steps.generate_url.outputs.URL }} --output feed_weekly.xml
+
+      - name: Commit and push if weekly feed changed
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add feed_weekly.xml
+          # Commit only if there are changes staged
+          git diff --staged --quiet || git commit -m "Update Weekly RSS feed"
+          git push

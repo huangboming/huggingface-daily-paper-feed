@@ -1,0 +1,38 @@
+name: Update Hugging Face Papers RSS Feed
+
+on:
+  schedule:
+    # Runs daily at midnight UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  update-feed:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Allow the job to push changes
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11' # Specify Python version
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run parser and generate feed
+        run: python parser.py --source https://huggingface.co/papers --output feed.xml
+
+      - name: Commit and push if feed changed
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add feed.xml
+          # Commit only if there are changes staged
+          git diff --staged --quiet || git commit -m "Update RSS feed"
+          git push

@@ -1,0 +1,37 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+.env/
+.venv/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Local testing/development
+*.bak
+*.tmp
+.coverage
+htmlcov/
+
+# Exclude the HTML file downloaded from HF (if you keep test files locally)
+*Daily Papers - Hugging Face.html
+
+# Uncomment the line below if you don't want to commit generated feed files
+# *.xml
