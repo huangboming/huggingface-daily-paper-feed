@@ -24,7 +24,7 @@ The following feed files are automatically generated and updated in this reposit
     *   Updates on the 1st of every month around midnight UTC.
     *   Sources from: `https://huggingface.co/papers/month/YYYY-MM` (dynamic URL)
 
-You can subscribe to these feeds using your favorite RSS reader by using the raw file URL (e.g., `https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPOSITORY/main/feed.xml`).
+You can subscribe to these feeds using your favorite RSS reader by using the raw file URL (e.g., `https://raw.githubusercontent.com/huangboming/huggingface-daily-paper-feed/refs/heads/main/feed.xml`).
 
 ## How it Works
 
@@ -50,7 +50,7 @@ You can also run the script locally to generate the feeds manually.
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/huggingface/papers-rss-feed.git
+    git clone https://github.com/huangboming/huggingface-daily-paper-feed.git
     cd papers-rss-feed
     ```
     (Replace `YOUR_USERNAME/YOUR_REPOSITORY` with the actual path to this repo).
